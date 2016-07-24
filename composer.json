@@ -10,11 +10,15 @@
         "symfony/translation": "^3.1",
         "symfony/security-csrf": "^3.1",
         "silex/web-profiler": "^2.0",
-        "symfony/monolog-bridge": "^3.1"
+        "symfony/monolog-bridge": "^3.1",
+        "php-di/php-di": "^5.3"
     },
     "autoload": {
         "psr-4": {
             "SimpleBudget\\": "src/"
         }
+    },
+    "require-dev": {
+        "psy/psysh": "@stable"
     }
 }
