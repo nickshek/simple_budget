@@ -10,6 +10,7 @@ require __DIR__.'/production.php';
 
 // enable the debug mode
 $app['debug'] = true;
+$app["simple_budget.base_url"] = "http://localhost:8000/";
 $app->register(new MonologServiceProvider(), array(
     'monolog.logfile' => __DIR__.'/../logs/silex_dev.log',
 ));

@@ -7,10 +7,10 @@ class FileBudgetRepository implements BudgetRepository
     private $file_path;
     private $default_currency;
 
-    public function __construct($file_path, $default_currency)
+    public function __construct()
     {
-        $this->file_path = $file_path;
-        $this->default_currency = $default_currency;
+        // $this->file_path = $file_path;
+        // $this->default_currency = $default_currency;
     }
 
     public function findAll($page = 1)

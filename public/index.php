@@ -9,6 +9,7 @@ define('BASEPATH', realpath(__DIR__.'/../'));
 
 $app = require __DIR__.'/../src/app.php';
 require __DIR__.'/../config/'.ENVIRONMENT.'.php';
+require __DIR__.'/../src/twig.php';
 require __DIR__.'/../src/routes.php';
 
 $app->run();
