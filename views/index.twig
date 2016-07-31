@@ -1,1 +1,15 @@
 {% extends "base.twig" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <h1>Balance</h1>
+        <p>{{balacne}}</p>
+        <h1>Account List</h1>
+        {% for account in account_list %}
+            <a href="" >{{account["name"]}}</a><br>
+        {% endfor %}
+    </div>
+</div>
+<!-- /.row -->
+{% endblock %}

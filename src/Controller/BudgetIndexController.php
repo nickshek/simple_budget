@@ -14,7 +14,11 @@ class BudgetIndexController{
   }
 
   public function index(){
-    $budget = $this->budget_repository->findAll();
-    return $this->twig->render('index.twig',compact($budget));
+    $account_list = $this->budget_repository->findAll();
+    $balacne = $this->budget_repository->getBalance();
+    return $this->twig->render('index.twig',array(
+      "account_list" => $account_list,
+      "balacne" => $balacne,
+    ));
   }
 }
