@@ -9,6 +9,45 @@
         {% for account in account_list %}
             <a href="" >{{account["name"]}}</a><br>
         {% endfor %}
+        <h1></h1>
+        {% if items %}
+          <table class="table">
+            <thead>
+              <tr>
+                <td>
+                    Date
+                </td>
+                <td>
+                    Description
+                </td>
+                <td>
+                    Price
+                </td>
+                <td>
+                    Category
+                </td>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in items %}
+                <tr>
+                  <td>
+                      {{item["date"]}}
+                  </td>
+                  <td>
+                      {{item["desc"]}}
+                  </td>
+                  <td>
+                      {{item["price"]}}
+                  </td>
+                  <td>
+                      {{item["category"]}}
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        {% endif %}
     </div>
 </div>
 <!-- /.row -->

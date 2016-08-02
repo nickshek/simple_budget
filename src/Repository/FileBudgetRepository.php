@@ -1,6 +1,7 @@
 <?php
 
 namespace SimpleBudget\Repository;
+use DateTime;
 
 class FileBudgetRepository implements BudgetRepository
 {
@@ -11,6 +12,19 @@ class FileBudgetRepository implements BudgetRepository
     {
         $this->file_path = $file_path;
         $this->default_currency = $default_currency;
+    }
+
+    private function getTransaction($account = null){
+      $dirs = $this->getAllDirs();
+      $items = array();
+      $budgets = array();
+      foreach ($dirs as $dir) {
+          $budget = require implode('/', array($this->file_path, $dir, 'budget.php'));
+          array_push($budgets, $budget);
+          $items = array_merge($items,$budget['items']);
+      }
+
+      return $items;
     }
 
     public function getBalance($account = null)
@@ -34,15 +48,15 @@ class FileBudgetRepository implements BudgetRepository
         $dirs = array_filter(glob(implode('/', array($this->file_path, '*'))), 'is_dir');
         $list = require implode('/', array($this->file_path, 'list.php'));
         $dirs = array_map(function ($dir) use ($list) {
-        $dir = basename($dir);
+          $dir = basename($dir);
 
-        return $dir;
-      }, $dirs);
+          return $dir;
+        }, $dirs);
 
         return $dirs;
     }
 
-    public function findAll($page = 1)
+    public function findAllAccount($page = 1)
     {
         $list = $this->getAllDirs();
 
@@ -58,4 +72,20 @@ class FileBudgetRepository implements BudgetRepository
           }
         }, $this->getAllDirs());
     }
+
+      public function getTransactionHistory($page = 1){
+          $items = $this->getTransaction(NULL);
+
+          $items = array_map(function($item){
+            $item["date_obj"] = DateTime::createFromFormat('Y-m-d H:i:s', $item['date']);
+            return $item;
+          }, $items);
+
+          usort($items, function ($a, $b) {
+              return $a['date_obj'] < $b['date_obj'];
+          });
+
+
+          return $items;
+      }
 }
